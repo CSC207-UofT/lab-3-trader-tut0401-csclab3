@@ -7,6 +7,8 @@
 
 import java.util.*;
 
+import static org.junit.Assert.assertEquals;
+
 
 public class Trader {
     private ArrayList<Tradable> inventory;
@@ -96,8 +98,11 @@ public class Trader {
         List<Tradable> all_items = Arrays.asList(
                 new Horse(),
                 new Horse(),
-                new Horse()
+                new Horse(),
                 // TODO: Add Tradable objects here!
+                new tradable()
+
+
         );
 
         /* Below, we've created two Traders. Their money, inventory, and
@@ -116,6 +121,11 @@ public class Trader {
             System.out.println("Trader 2 details:\n" + trader2);
             i++;
         }
+
+        drivable car = new drivable(100);
+        car.upgradeSpeed();
+        car.upgradeSpeed();
+        assertEquals(102, car.getMaxSpeed());
     }
 
     @Override
@@ -133,5 +143,45 @@ public class Trader {
 
         return details.toString();
     }
+
+}
+
+class tradable implements Tradable {
+
+    tradable(){
+
+    }
+
+    @Override
+    public int getPrice() {
+        return 10;
+    }
+}
+
+
+class drivable implements Drivable {
+    int MaxSpeed;
+
+    drivable(int maxSpeed){
+        this.MaxSpeed = maxSpeed;
+    }
+
+    @Override
+    public void upgradeSpeed() {
+        this.MaxSpeed -= 1;
+    }
+
+    @Override
+    public void downgradeSpeed() {
+        this.MaxSpeed += 1;
+
+    }
+
+    @Override
+    public int getMaxSpeed() {
+        return this.MaxSpeed;
+    }
+
+
 
 }
